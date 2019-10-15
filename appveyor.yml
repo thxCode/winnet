@@ -1,0 +1,38 @@
+platform: x64
+
+clone_folder: c:\gopath\src\github.com\thxcode\winnet
+
+install:
+- echo %PATH%
+- echo %GOPATH%
+- set PATH=%GOPATH%\bin;c:\go\bin;%PATH%
+- go version
+- go env
+
+environment:
+  GOPATH: c:\gopath
+
+before_build:
+- ps: go fmt ./...
+- ps: go vet ./...
+- ps: .\scripts\test.ps1
+
+build_script:
+- ps: .\scripts\build.ps1
+
+after_build:
+- ps: Get-ChildItem bin\*.exe | % { Push-AppveyorArtifact $_.FullName -FileName $_.Name }
+
+deploy:
+- provider: GitHub
+  tag: $(APPVEYOR_REPO_TAG_NAME)
+  release: $(APPVEYOR_PROJECT_NAME)-$(APPVEYOR_BUILD_VERSION)
+  description: $(APPVEYOR_REPO_TAG_NAME) Released!
+  auth_token:
+    secure: dN2wlMTwWHkuN2JBQFBeo/2r2VVI8GnaFR1i4Fau4GQZNNP+bOQrs+rBK0Hsj5Jr
+  artifact: winnet.exe
+  draft: true
+  force_update: true
+  on:
+    branch: master
+    APPVEYOR_REPO_TAG: true
