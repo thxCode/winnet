@@ -26,8 +26,8 @@ after_build:
 deploy:
 - provider: GitHub
   tag: $(APPVEYOR_REPO_TAG_NAME)
-  release: $(APPVEYOR_PROJECT_NAME)-$(APPVEYOR_BUILD_VERSION)
-  description: $(APPVEYOR_REPO_TAG_NAME) Released!
+  release: $(APPVEYOR_REPO_TAG_NAME)
+  description: CI $(APPVEYOR_BUILD_VERSION) build.
   auth_token:
     secure: dN2wlMTwWHkuN2JBQFBeo/2r2VVI8GnaFR1i4Fau4GQZNNP+bOQrs+rBK0Hsj5Jr
   artifact: winnet.exe
