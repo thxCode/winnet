@@ -2,7 +2,7 @@
 
 [![Build status](https://ci.appveyor.com/api/projects/status/5dqfpq07sqsoqus1?svg=true)](https://ci.appveyor.com/project/thxCode/winnet)
 
-A Go implementation replaces [rakelkar/gonetsh](https://github.com/rakelkar/gonetsh) to support none-English locale Windows OS.
+A Go implementation replaces [rakelkar/gonetsh](https://github.com/rakelkar/gonetsh) to support non-English locale Windows OS.
 
 ## Test
 
